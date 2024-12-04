@@ -1,14 +1,31 @@
 document.getElementById('newItemForm').addEventListener('submit', addItem);
 const userEmail = localStorage.getItem('userEmail');
 
-// Actualizar el título de bienvenida
-const titulo = document.getElementById('bienvenido');
-titulo.innerText = `¡Bienvenido ${userEmail}!`;
+// Cargar el JSON desde la URL
+fetch('https://raw.githubusercontent.com/juanmontes55/Sistemas-distribuidos/refs/heads/main/correos.json')
+    .then(response => response.json())
+    .then(data => {
+        // Buscar el nombre correspondiente al correo
+        const user = data.find(user => user.email === userEmail);
+        const titulo = document.getElementById('bienvenido');
+
+        if (user) {
+            // Actualizar el título de bienvenida con el nombre
+            titulo.innerText = ¡Bienvenido ${user.nombre}!;
+        } else {
+            // Si no se encuentra el usuario, mostrar un mensaje de error
+            titulo.innerText = '¡Bienvenido!'; // O manejarlo de otra manera
+        }
+    })
+    .catch(error => {
+        console.error('Error al cargar el JSON:', error);
+        const titulo = document.getElementById('bienvenido');
+        titulo.innerText = '¡Bienvenido!'; // Manejo de error
+    });
 
 
 // Función para manejar la carga de archivos
 async function handleUpload(itemId) {
-
     console.log('ID del item:', itemId); // Verifica el valor de itemId
 
     if (!itemId) {
@@ -28,27 +45,21 @@ async function handleUpload(itemId) {
             return;
         }
 
-        const confirmUpload = confirm(`¿Desea cargar el archivo "${file.name}"?`);
+        const confirmUpload = confirm(¿Desea cargar el archivo "${file.name}"?);
         if (!confirmUpload) return;
 
         const formData = new FormData();
         formData.append('file', file);
 
-        console.log('Enviando archivo:', file);
-        console.log('URL de fetch:', `http://localhost:3000/items/${itemId}/upload`);
-  
         try {
-        
             console.log('Preparando para enviar el archivo...');
-            console.log('Ruta de la API:', `http://localhost:3000/items/${itemId}/upload`);
+            console.log('Ruta de la API:', http://localhost:3000/items/${itemId}/upload);
             console.log('Archivo seleccionado:', file);
 
-            const response = await fetch(`http://localhost:3000/items/${itemId}/upload`, {
+            const response = await fetch(http://localhost:3000/items/${itemId}/upload, {
                 method: 'POST',
                 body: formData,
             });
-       
-         
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -56,29 +67,26 @@ async function handleUpload(itemId) {
             }
 
             const data = await response.json();
-            console.log('Respuesta del servidor (código de estado):', response.status);
-            console.log('Datos de respuesta del servidor:', data);
-
-           // const data = await response.json();
             console.log('Datos del servidor:', data);
+
+            // Actualiza la tabla directamente con el dato recibido
             if (data.ruta) {
-                const row = document.querySelector(`tr[data-id="${itemId}"]`);
+                const row = document.querySelector(tr[data-id="${itemId}"]);
                 if (row) {
                     const rutaCell = row.querySelector('td:last-child');
-                    rutaCell.innerHTML = `<a href="${data.ruta}" target="_blank">Abrir archivo</a>`;
+                    rutaCell.innerText = data.ruta; // Actualiza directamente con la ruta recibida
                 }
-            }        
+            }
+
             alert('Archivo cargado y enlace almacenado.');
-
-
-            
         } catch (error) {
             console.error('Error al cargar el archivo:', error.message);
-            alert(`Ocurrió un error: ${error.message}`);
+            alert(Ocurrió un error: ${error.message});
         }
     };
     input.click();
 }
+
 
 // Función para agregar un nuevo item a la tabla y subirlo a MongoDB
 function addItem(event) {
@@ -127,7 +135,7 @@ function addItem(event) {
         tableBody.appendChild(newRow);
 
         // Asignar el evento onclick al botón "Agregar" recién agregado
-        const newButton = document.getElementById(`addBtn-${data.id}`);
+        const newButton = document.getElementById(addBtn-${data.id});
         newButton.onclick = () => handleUpload(data.id);
 
         // Limpiar el formulario y cerrar el modal
@@ -139,7 +147,7 @@ function addItem(event) {
 }
 
 // Cargar datos desde MongoDB al cargar la página
-fetch(`http://localhost:3000/items?correo=${encodeURIComponent(userEmail)}`)
+fetch(http://localhost:3000/items?correo=${encodeURIComponent(userEmail)})
     .then(response => response.json())
     .then(data => {
         const tableBody = document.getElementById('tableBody');
