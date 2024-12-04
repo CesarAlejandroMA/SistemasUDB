@@ -81,7 +81,7 @@ async function handleUpload(itemId) {
             alert('Archivo cargado y enlace almacenado.');
         } catch (error) {
             console.error('Error al cargar el archivo:', error.message);
-            alert(Ocurrió un error: ${error.message});
+            alert(´Ocurrió un error: ${error.message}´);
         }
     };
     input.click();
@@ -135,7 +135,7 @@ function addItem(event) {
         tableBody.appendChild(newRow);
 
         // Asignar el evento onclick al botón "Agregar" recién agregado
-        const newButton = document.getElementById(addBtn-${data.id});
+        const newButton = document.getElementById(´addBtn-${data.id}´);
         newButton.onclick = () => handleUpload(data.id);
 
         // Limpiar el formulario y cerrar el modal
