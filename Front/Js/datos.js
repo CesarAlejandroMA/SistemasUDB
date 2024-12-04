@@ -45,7 +45,7 @@ async function handleUpload(itemId) {
             return;
         }
 
-        const confirmUpload = confirm(¿Desea cargar el archivo "${file.name}"?);
+        const confirmUpload = confirm(´¿Desea cargar el archivo "${file.name}"?´);
         if (!confirmUpload) return;
 
         const formData = new FormData();
