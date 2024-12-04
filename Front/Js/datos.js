@@ -8,10 +8,11 @@ fetch('https://raw.githubusercontent.com/juanmontes55/Sistemas-distribuidos/refs
         // Buscar el nombre correspondiente al correo
         const user = data.find(user => user.email === userEmail);
         const titulo = document.getElementById('bienvenido');
-
+        console.log('Test', user)
+        
         if (user) {
             // Actualizar el título de bienvenida con el nombre
-            titulo.innerText = `¡Bienvenido ${user.nombre}!`;
+            titulo.innerText = '¡Bienvenido ${user.nombre}!';
         } else {
             // Si no se encuentra el usuario, mostrar un mensaje de error
             titulo.innerText = '¡Bienvenido!'; // O manejarlo de otra manera
