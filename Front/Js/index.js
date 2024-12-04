@@ -17,7 +17,7 @@ document.getElementById('emailForm').addEventListener('submit', function(event) 
     //
 
     // Enviar el correo al backend para generar y enviar el código
-    fetch('https://966d-186-114-123-249.ngrok-free.app', {
+    fetch(' https://7512-181-55-70-113.ngrok-free.app', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
