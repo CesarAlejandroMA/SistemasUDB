@@ -17,7 +17,7 @@ document.getElementById('emailForm').addEventListener('submit', function(event) 
     //
 
     // Enviar el correo al backend para generar y enviar el código
-    fetch('https://c00b-181-55-70-113.ngrok-free.app/', {
+    fetch('https://c00b-181-55-70-113.ngrok-free.app/send-verification-code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
