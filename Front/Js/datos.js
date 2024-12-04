@@ -45,7 +45,7 @@ async function handleUpload(itemId) {
             return;
         }
 
-        const confirmUpload = confirm(´¿Desea cargar el archivo "${file.name}"?´);
+        const confirmUpload = confirm(`¿Desea cargar el archivo "${file.name}"?`);
         if (!confirmUpload) return;
 
         const formData = new FormData();
@@ -53,10 +53,10 @@ async function handleUpload(itemId) {
 
         try {
             console.log('Preparando para enviar el archivo...');
-            console.log('Ruta de la API:', https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items/${itemId}/upload);
+            console.log('Ruta de la API:', `https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items/${itemId}/upload`);
             console.log('Archivo seleccionado:', file);
 
-            const response = await fetch(https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items/${itemId}/upload, {
+            const response = await fetch(`https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items/${itemId}/upload`, {
                 method: 'POST',
                 body: formData,
             });
@@ -71,7 +71,7 @@ async function handleUpload(itemId) {
 
             // Actualiza la tabla directamente con el dato recibido
             if (data.ruta) {
-                const row = document.querySelector(tr[data-id="${itemId}"]);
+                const row = document.querySelector(`tr[data-id="${itemId}"]`);
                 if (row) {
                     const rutaCell = row.querySelector('td:last-child');
                     rutaCell.innerText = data.ruta; // Actualiza directamente con la ruta recibida
@@ -81,7 +81,7 @@ async function handleUpload(itemId) {
             alert('Archivo cargado y enlace almacenado.');
         } catch (error) {
             console.error('Error al cargar el archivo:', error.message);
-            alert(´Ocurrió un error: ${error.message}´);
+            alert(`Ocurrió un error: ${error.message}`);
         }
     };
     input.click();
@@ -135,7 +135,7 @@ function addItem(event) {
         tableBody.appendChild(newRow);
 
         // Asignar el evento onclick al botón "Agregar" recién agregado
-        const newButton = document.getElementById(´addBtn-${data.id}´);
+        const newButton = document.getElementById(`addBtn-${data.id}`);
         newButton.onclick = () => handleUpload(data.id);
 
         // Limpiar el formulario y cerrar el modal
@@ -147,7 +147,7 @@ function addItem(event) {
 }
 
 // Cargar datos desde MongoDB al cargar la página
-fetch(https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items?correo=${encodeURIComponent(userEmail)})
+fetch(`https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items?correo=${encodeURIComponent(userEmail)}`)
     .then(response => response.json())
     .then(data => {
         const tableBody = document.getElementById('tableBody');
@@ -171,3 +171,4 @@ fetch(https://3392-2800-e2-ba80-854-d0f7-be11-2481-ce77.ngrok-free.app/items?cor
         });
     })
     .catch(error => console.error('Error al cargar los datos desde MongoDB:', error));
+
